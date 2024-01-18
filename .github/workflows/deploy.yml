@@ -23,6 +23,7 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v0
         env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
           TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
         with:
