@@ -67,6 +67,37 @@ export default defineConfig({
           },
         ],
       },
+      {
+        name: "pages",
+        label: "Pages",
+        path: "src/content/pages",
+        format: "mdx",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Description",
+          },
+          {
+            type: "boolean",
+            name: "showInMenu",
+            label: "Show in menu",
+          },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body",
+            isBody: true,
+          },
+        ],
+      },
     ],
   },
 });

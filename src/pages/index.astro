@@ -1,28 +1,25 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getEntry } from 'astro:content';
+import Document from '@src/layouts/Document.astro';
+import BaseHead from '@src/components/BaseHead.astro';
+import Header from '@src/components/Header.astro';
+import Footer from '@src/components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '@src/consts';
+
+const entry = await getEntry('pages', 'home');
+const { Content } = await entry.render();
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header title={SITE_TITLE} />
-		<main>
-			<h1>Hey there!</h1>
+<Document>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header title={SITE_TITLE} />
 
-			<p>Welcome to Hri100 Blog – the cozy corner of the internet where I spill the beans on life, laughs, and everything in between.</p>
-
-			<p>This isn't your typical blog; it's more like a comfy couch where you can kick back, relax, and get a glimpse into my world. We've got stories, thoughts, and maybe a sprinkle of weirdness—just the good stuff.</p>
-
-			<p>Feel free to dive into the blog posts, shoot the breeze (or a virtual high-five), and make yourself at home. It's all about the good vibes here, and you're a crucial part of it!</p>
-
-			<p>Thanks for swinging by Hri100 Blog. Stick around, join the fun, and let's make this digital space feel like one big, awesome hangout.</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+    <main>
+      <Content />
+    </main>
+    <Footer />
+  </body>
+</Document>

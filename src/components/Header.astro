@@ -1,18 +1,27 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import { getCollection } from 'astro:content';
+import HeaderLink from '@src/components/HeaderLink.astro';
+import { SITE_TITLE } from '@src/consts';
+
+const pageEntries = await getCollection('pages');
+const homeEntry = pageEntries.find((entry) => entry.slug === 'home');
 ---
 <header>
   <nav>
     <h2><a href="/">{SITE_TITLE}</a></h2>
 
     <div class="internal-links">
-      <HeaderLink href="/">Home</HeaderLink>
+      <HeaderLink href="/">{homeEntry.data.title}</HeaderLink>
       <HeaderLink href="/blog/">Blog</HeaderLink>
-      <HeaderLink href="/about/">About</HeaderLink>
+
+      {pageEntries
+        .filter((entry) => entry.data.showInMenu)
+        .map((entry) => (
+          <HeaderLink href={`/${entry.slug}/`}>{entry.data.title}</HeaderLink>
+        ))}
     </div>
 
-    <div class="social-links">
+    <div class="social-links" style={{ display: 'none' }}>
       <a href="https://github.com/hri100hristov" target="_blank">
         <span class="sr-only">Go to Astro's GitHub repo</span>
         <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"

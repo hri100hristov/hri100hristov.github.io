@@ -1,17 +1,17 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import Document from '@src/layouts/Document.astro';
+import BaseHead from '@src/components/BaseHead.astro';
+import Header from '@src/components/Header.astro';
+import Footer from '@src/components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '@src/consts';
 import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
+import FormattedDate from '@src/components/FormattedDate.astro';
 
 const posts = (await getCollection('blog'))
   // Newest on top
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-<!doctype html>
-<html lang="en">
+<Document>
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
@@ -107,4 +107,4 @@ const posts = (await getCollection('blog'))
 
     <Footer />
   </body>
-</html>
+</Document>
